@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -18,3 +22,13 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('admin/dashboard', [AdminController::class , 'login'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/admin/list', [AdminController::class , 'list']);
+
+Route::get('student/dashboard' , [StudentController::class , 'login'])->middleware(['auth' , 'student']);
+
+Route::get('teacher/dashboard' , [TeacherController::class , 'login'])->middleware(['auth', 'teacher']);
+
+Route::get('parent/dashboard' , [ParentController::class , 'login'])->middleware(['auth' , 'parent']);
