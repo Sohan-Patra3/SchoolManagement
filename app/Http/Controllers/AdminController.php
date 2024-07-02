@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\forgerpasswordmail;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -15,11 +16,76 @@ class AdminController extends Controller
     }
 
     public function list(){
-        return view('admin.admin.list');
+        $data = User::where('user_type' , 'admin')->paginate(1);
+        return view('admin.admin.list',compact('data'));
     }
 
+    public function add(){
+
+        return view('admin.admin.add');
+    }
+
+    public function insert(Request $request){
+
+        request()->validate([
+            'email'=>'required|email|unique:users'
+        ]);
+
+
+        $user = new User;
+        $user->name=trim($request->name);
+        $user->email=trim($request->email);
+        $user->password=Hash::make($request->password);
+        $user->user_type = "admin";
+        $user->save();
+
+        return redirect('admin/admin/list')->with('success', "Admin successfully created");
+    }
+
+    public function edit($id){
+        $user = User::find($id);
+        return view('admin.admin.edit' , compact('user'));
+    }
+
+    public function editAdmin(Request $request,$id){
+        $user = User::find($id);
+
+        $user->name=$request->name;
+
+        $user->email=$request->email;
+
+        $user->save();
+
+        return redirect('admin/admin/list');
+    }
+
+    public function deleteAdmin($id){
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->back();
+    }
+
+    public function search(Request $request){
+        $search = $request->search;
+
+        $data = User::where('name', 'LIKE', '%' . $search . '%' )->where('user_type' , 'admin')->paginate(5);
+
+        return view('admin.admin.list', compact('data'));
+    }
+
+
+
+
+
+
+
+
+
+
     public function forget_password(){
-        return view('auth.forget_password');
+        $data['header_title']='Admin List';
+        return view('auth.forget_password',$data);
     }
 
     public function postForgotPassword(Request $request) {

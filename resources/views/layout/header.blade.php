@@ -146,9 +146,16 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('admin/admin/list') }}"
-                            class="nav-link {{ Request::segment(3) == 'list' ? 'active' : '' }}">
+                            class="nav-link {{ Request::segment(2) == 'admin' ? 'active' : '' }}">
                             <i class="nav-icon far fa-user"></i>
                             <p>Admin</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('admin/class/list') }}"
+                            class="nav-link {{ Request::segment(3) == 'list' ? 'active' : '' }}">
+                            <i class="nav-icon far fa-user"></i>
+                            <p>Class</p>
                         </a>
                     </li>
                 @elseif (Auth::user()->user_type === 'student')
