@@ -5,6 +5,7 @@ use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +50,30 @@ Route::get('admin/class/list' , [ClassController::class , 'list'])->middleware([
 Route::get('admin/class/add' , [ClassController::class , 'addClass'])->middleware(['auth' , 'admin']);
 
 Route::post('insertClass' , [ClassController::class , 'insertClass'])->middleware(['auth' , 'admin' ]);
+
+Route::get('admin/class/edit/{id}' , [ClassController::class , 'editClass'])->middleware(['auth' , 'admin']);
+
+Route::post('insertEditClass/{id}' , [ClassController::class , 'insertEditClass'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/class/delete/{id}' , [ClassController::class , 'deleteClass'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/class/search' , [ClassController::class , 'classSearch'])->middleware(['admin' , 'auth']);
+
+//subject url
+
+Route::get('admin/subject/list' , [SubjectController::class , 'subjectList'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/subject/add' , [SubjectController::class , 'addSubject'])->middleware(['auth' , 'admin']);
+
+Route::post('insertSubject' , [SubjectController::class , 'insertSubject'])->middleware(['admin' , 'auth']);
+
+Route::get('admin/subject/edit/{id}' , [SubjectController::class , 'insertEditSubject'])->middleware(['auth' , 'admin']);
+
+Route::post('insertEditSubject/{id}' , [SubjectController::class , 'editSubject'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/subject/delete/{id}' , [SubjectController::class , 'deleteSubject'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/subject/search' , [SubjectController::class , 'searchSubject'])->middleware(['auth' , 'admin']);
 
 
 

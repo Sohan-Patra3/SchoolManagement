@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ClassModel extends Model
+class Subject extends Model
 {
     use HasFactory;
 
-    protected $table = "class";
+    protected $table="subject";
 
     public function user(){
         return $this->hasOne('App\Models\User','id','created_by');

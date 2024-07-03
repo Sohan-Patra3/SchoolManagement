@@ -8,10 +8,10 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
 
-                        <h1>CLASS LIST</h1>
+                        <h1>SUBJECT LIST</h1>
                     </div>
                     <div class="col-sm-6" style="text-align: right">
-                        <a href="{{ url('admin/class/add') }}" class="btn btn-primary">Add New Class</a>
+                        <a href="{{ url('admin/subject/add') }}" class="btn btn-primary">Add New Subject</a>
                     </div>
                     {{-- <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -20,7 +20,7 @@
                         </ol>
                     </div> --}}
                 </div>
-                <form action="{{ url('admin/class/search') }}" method="GET">
+                <form action="{{ url('admin/subject/search') }}" method="GET">
                     <div class="form-group">
                         <input type="text" class="form-control" id="nameInput" placeholder="Search class name"
                             name="search">
@@ -41,7 +41,7 @@
                         <div class="card">
                             <div class="card-header">
                                 @include('message')
-                                <h1 class="card-title">Class List</h1>
+                                <h1 class="card-title">Subject List</h1>
 
                             </div>
                             <!-- /.card-header -->
@@ -51,6 +51,7 @@
                                         <tr>
                                             <th>Sl.no</th>
                                             <th>Name</th>
+                                            <th>type</th>
                                             <th>Status</th>
                                             <th>Created By</th>
                                             <th>Action</th>
@@ -58,10 +59,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($class as $value)
+                                        @foreach ($subject as $value)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $value->name }}</td>
+                                                <td>{{ $value->type }}</td>
                                                 <td>
                                                     @if ($value->status == 0)
                                                         Active
@@ -71,9 +73,9 @@
                                                 </td>
                                                 <td>{{ $value->user->name }}</td>
                                                 <td>
-                                                    <a href="{{ url('admin/class/edit', $value->id) }}"
+                                                    <a href="{{ url('admin/subject/edit', $value->id) }}"
                                                         class="btn btn-primary">Edit</a>
-                                                    <a href="{{ url('admin/class/delete', $value->id) }}"
+                                                    <a href="{{ url('admin/subject/delete', $value->id) }}"
                                                         class="btn btn-danger">Delete</a>
                                                 </td>
                                             </tr>
