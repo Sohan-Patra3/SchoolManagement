@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\ClassSubjectController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\UserController;
+use App\Models\ClassSubjectModel;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -74,6 +77,43 @@ Route::post('insertEditSubject/{id}' , [SubjectController::class , 'editSubject'
 Route::get('admin/subject/delete/{id}' , [SubjectController::class , 'deleteSubject'])->middleware(['auth' , 'admin']);
 
 Route::get('admin/subject/search' , [SubjectController::class , 'searchSubject'])->middleware(['auth' , 'admin']);
+
+//Assing subject
+
+Route::get('admin/assing_subject/list' , [ClassSubjectController::class , 'list'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/assing_subject/add' , [ClassSubjectController::class , 'add'])->middleware(['auth' , 'admin']);
+
+Route::post('insertAssingSubject' , [ClassSubjectController::class , 'insert'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/assing_subject/edit/{id}' , [ClassSubjectController::class , 'editInsert'])->middleware(['auth' , 'admin']);
+
+Route::post('editInsertAssingSubject/{id}' , [ClassSubjectController::class , 'editInsertAssingSub'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/assing_subject/delete/{id}' , [ClassSubjectController::class , 'deleteAssingSub'])->middleware(['auth' , 'admin']);
+
+// Route::get('admin/assing_subject/search' , [ClassSubjectController::class , 'searchAssingSub'])->middleware(['auth' , 'admin']);
+
+//change password
+
+Route::get('admin/change_password' , [UserController::class , 'changePassword'])->middleware(['auth' , 'admin']);
+
+Route::post('update_changePassword' , [UserController::class , 'update_changePassword']);
+
+Route::get('teacher/change_password' , [UserController::class , 'changePassword'])->middleware(['auth' , 'teacher']);
+
+Route::get('student/change_password' , [UserController::class , 'changePassword'])->middleware(['auth' , 'student']);
+
+Route::get('parent/change_password' , [UserController::class , 'changePassword'])->middleware(['auth' , 'parent']);
+
+Route::get('admin/student/list' , [StudentController::class, 'list'])->middleware(['admin' , 'auth']);
+
+Route::get('admin/student/add' , [StudentController::class , 'add'])->middleware(['admin' , 'auth']);
+
+
+
+
+
 
 
 
