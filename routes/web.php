@@ -106,9 +106,28 @@ Route::get('student/change_password' , [UserController::class , 'changePassword'
 
 Route::get('parent/change_password' , [UserController::class , 'changePassword'])->middleware(['auth' , 'parent']);
 
+//student list
+
 Route::get('admin/student/list' , [StudentController::class, 'list'])->middleware(['admin' , 'auth']);
 
 Route::get('admin/student/add' , [StudentController::class , 'add'])->middleware(['admin' , 'auth']);
+
+Route::post('insertStduent' , [StudentController::class , 'insert'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/student/edit/{id}' , [StudentController::class , 'edit'])->middleware(['auth' , 'admin']);
+
+Route::post('editStduent/{id}' , [StudentController::class , 'editStudent'])->middleware(['admin' , 'auth']);
+
+Route::get('admin/student/delete/{id}' , [StudentController::class , 'delete'])->middleware(['admin' , 'auth']);
+
+Route::get('admin/student/search' , [StudentController::class , 'search'])->middleware(['auth' , 'admin']);
+
+//parent list
+
+Route::get('admin/parent/list' , [ParentController::class , 'list'])->middleware(['auth' , 'admin']);
+
+
+
 
 
 

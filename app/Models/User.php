@@ -52,4 +52,8 @@ class User extends Authenticatable
     static public function getSingle($id){
         return self::find($id);
     }
+
+    public function class(){
+        return $this->hasOne('App\Models\ClassModel','id','class_id');
+    }
 }
