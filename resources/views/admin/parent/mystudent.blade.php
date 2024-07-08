@@ -12,7 +12,7 @@
 
 
                 </div>
-                <form action="{{ url('admin/parent/mystudent') }}" method="GET">
+                <form action="{{ url('admin/parent/searchStudent', $id) }}" method="GET">
                     <div class="form-group">
                         <input type="text" class="form-control" id="nameInput" placeholder="Search Student" name="search">
                         <input type="submit" value="search" class="btn btn-primary mt-2">

@@ -95,11 +95,22 @@ class ParentController extends Controller
         return view('admin.parent.mystudent' , compact('student' , 'id'));
     }
 
+    public function searchStudent(Request $request, $id){
+        $search = $request->search;
+        $student = User::where('name', 'LIKE', '%' . $search . '%')
+                        ->where('user_type', 'student')
+                        ->get();
+        return view('admin.parent.mystudent', compact('student', 'id'));
+    }
+
+
     public function addParent($pid ,$id){
         $student = User::find($id);
         $student-> parent_id = $pid;
         $student->save();
         return redirect('admin/parent/list')->with('success' , 'Parent data added successfully');
     }
+
+
 
 }

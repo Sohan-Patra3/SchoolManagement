@@ -144,6 +144,28 @@ Route::get('admin/parent/mystudent/{id}' , [ParentController::class , 'mystudent
 
 Route::get('admin/addParentStudent/{pid}/{id}' , [ParentController::class , 'addParent'])->middleware(['auth' , 'admin']);
 
+Route::get('admin/parent/searchStudent/{id}', [ParentController::class, 'searchStudent'])->middleware(['auth', 'admin']);
+
+
+//Teacher List
+Route::get('admin/teacher/list' , [TeacherController::class , 'list'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/teacher/add' , [TeacherController::class , 'add'])->middleware(['auth' , 'admin']);
+
+Route::post('insertTeacher' , [TeacherController::class , 'insert'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/teacher/edit/{id}' , [TeacherController::class , 'edit'])->middleware(['auth' , 'admin']);
+
+Route::post('updateTeacher/{id}' , [TeacherController::class , 'update'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/teacher/delete/{id}' , [TeacherController::class , 'delete'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/teacher/search' , [TeacherController::class , 'search'])->middleware(['auth' , 'admin']);
+
+Route::get('teacher/account' , [TeacherController::class , 'myAccount'])->middleware(['auth' , 'teacher']);
+
+Route::post('updateMyAccount/{id}' , [TeacherController::class , 'updateMyAccount'])->middleware(['auth' , 'teacher']);
+
 
 
 
