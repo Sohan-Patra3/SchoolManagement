@@ -24,9 +24,9 @@
                                         </div>
 
                                         <div class="form-group col-md-6">
-                                            <label for="nameInput">Last Name <span style="color: red">*</span></label>
+                                            <label for="nameInput">Last Name </label>
                                             <input type="text" class="form-control" id="nameInput"
-                                                placeholder="Enter your last name" name="last_name" required
+                                                placeholder="Enter your last name" name="last_name"
                                                 value="{{ $student->last_name }}">
                                         </div>
 

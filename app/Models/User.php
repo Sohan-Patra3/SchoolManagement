@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use GuzzleHttp\Psr7\Request;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -56,4 +59,16 @@ class User extends Authenticatable
     public function class(){
         return $this->hasOne('App\Models\ClassModel','id','class_id');
     }
+
+    public function parent()
+    {
+        return $this->hasMany(User::class,'id' , 'parent_id');
+    }
+
+    public function children()
+    {
+    return $this->hasMany(User::class, 'parent_id', 'id');
+    }
+
+
 }

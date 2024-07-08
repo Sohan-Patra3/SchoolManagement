@@ -126,6 +126,32 @@ Route::get('admin/student/search' , [StudentController::class , 'search'])->midd
 
 Route::get('admin/parent/list' , [ParentController::class , 'list'])->middleware(['auth' , 'admin']);
 
+Route::get('admin/parent/add' , [ParentController::class , 'add'])->middleware(['admin' , 'auth']);
+
+Route::post('insertParent' , [ParentController::class , 'insert'])->middleware(['admin' , 'auth']);
+
+Route::get('admin/parent/edit/{id}' , [ParentController::class , 'edit'])->middleware(['admin' , 'auth']);
+
+Route::post('editParent/{id}' , [ParentController::class , 'editParent'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/parent/delete/{id}' , [ParentController::class , 'delete'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/parent/search' , [ParentController::class , 'search'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/parent/mystudent/{id}' , [ParentController::class , 'mystudent'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/parent/mystudent/{id}' , [ParentController::class , 'mystudent'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/addParentStudent/{pid}/{id}' , [ParentController::class , 'addParent'])->middleware(['auth' , 'admin']);
+
+
+
+
+
+
+
+
+
 
 
 

@@ -42,6 +42,7 @@
                                             <th>Sl.no</th>
                                             <th>Profile Picture</th>
                                             <th>Name</th>
+                                            <th>Parent Name</th>
                                             <th>Email</th>
                                             <th>Addimission No</th>
                                             <th>Roll No</th>
@@ -56,7 +57,6 @@
                                             <th>Height</th>
                                             <th>Weight</th>
                                             <th>Status</th>
-                                            <th>Create Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -68,6 +68,12 @@
                                                         src="/products/{{ $student->profile_pic }}" alt=""
                                                         height="50" width="50"></td>
                                                 <td>{{ $student->name }} {{ $student->last_name }}</td>
+                                                <td>
+                                                    @foreach ($student->parent as $child)
+                                                        {{ $child->name }} {{ $child->last_name }}<br>
+                                                    @endforeach
+                                                </td>
+                                                </td>
                                                 <td>{{ $student->email }}</td>
                                                 <td>{{ $student->addmission_number }}</td>
                                                 <td>{{ $student->roll_number }}</td>
@@ -88,7 +94,7 @@
                                                         Inactive
                                                     @endif
                                                 </td>
-                                                <td>{{ $student->created_at }}</td>
+                                               
                                                 <td><a href="{{ url('admin/student/edit', $student->id) }}"
                                                         class="btn btn-primary">Edit</a>
                                                     <a href="{{ url('admin/student/delete', $student->id) }}"
