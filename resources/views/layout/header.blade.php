@@ -191,12 +191,27 @@
                         </a>
                     </li>
 
-
                     <li class="nav-item">
                         <a href="{{ url('admin/assing_subject/list') }}"
                             class="nav-link {{ Request::segment(2) == 'assing_subject' ? 'active' : '' }}">
                             <i class="nav-icon far fa-user"></i>
                             <p>Assing Subject</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ url('admin/assing_class/list') }}"
+                            class="nav-link {{ Request::segment(2) == 'assing_class' ? 'active' : '' }}">
+                            <i class="nav-icon far fa-user"></i>
+                            <p>Assing Class</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ url('admin/account') }}"
+                            class="nav-link {{ Request::segment(2) == 'account' ? 'active' : '' }}">
+                            <i class="nav-icon far fa-user"></i>
+                            <p>My Account</p>
                         </a>
                     </li>
 
@@ -213,6 +228,23 @@
                             class="nav-link {{ Request::segment(2) == 'dashboard' ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>Dashboard</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ url('student/subject') }}"
+                            class="nav-link {{ Request::segment(2) == 'subject' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>My Subject</p>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="{{ url('student/account') }}"
+                            class="nav-link {{ Request::segment(2) == 'account' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>My Account</p>
                         </a>
                     </li>
 
@@ -255,6 +287,31 @@
                             <p>Dashboard</p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ url('parent/mystudent') }}"
+                            class="nav-link {{ Request::segment(2) == 'mystudent' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>My Student</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ url('parent/studentSubject') }}"
+                            class="nav-link {{ Request::segment(2) == 'studentSubject' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>Student Subject</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ url('parent/account') }}"
+                            class="nav-link {{ Request::segment(2) == 'account' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>My Account</p>
+                        </a>
+                    </li>
+
 
                     <li class="nav-item">
                         <a href="{{ url('parent/change_password') }}"

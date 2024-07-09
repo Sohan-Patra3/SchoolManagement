@@ -157,6 +157,11 @@
 
                                     </div>
 
+                                    <div class="form-group">
+                                        <label for="passwordInput">Password <span style="color: red">*</span></label>
+                                        <input type="password" class="form-control" id="passwordInput"
+                                            placeholder="Password" name="password" required>
+                                    </div>
 
 
 

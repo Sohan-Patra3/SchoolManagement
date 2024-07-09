@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ParentController extends Controller
@@ -40,6 +41,8 @@ class ParentController extends Controller
             $parent->profile_pic = $imagename;
         }
 
+        $parent->password=Hash::make($request->password);
+        $parent->user_type="parent";
         $parent->save();
 
         return redirect('admin/parent/list')->with('success' , 'Parent data uploaded successfully');
@@ -111,6 +114,39 @@ class ParentController extends Controller
         return redirect('admin/parent/list')->with('success' , 'Parent data added successfully');
     }
 
+    public function myAccount(){
+        $parent = User::find(Auth::user()->id);
+        return view('parent.myaccount' , compact('parent'));
+    }
+
+    public function updateParent(Request $request , $id){
+        $parent = User::find($id);
+
+        $parent->name=$request->name;
+        $parent->last_name=$request->last_name;
+        $parent->occupation=$request->occupation;
+        $parent->address=$request->address;
+        $parent->gender=$request->gender;
+        $parent->mobile_number=$request->mobile_number;
+        $parent->email=$request->email;
+
+
+        if($request->hasFile('profile_pic')){
+            $image = $request->file('profile_pic');
+            $imagename = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('products'), $imagename);
+            $parent->profile_pic = $imagename;
+        }
+
+        $parent->save();
+
+        return redirect()->back()->with('success' , 'Parent data updated successfully');
+    }
+
+    public function myStudentParent(){
+        $parent = User::find(Auth::user()->id);
+        return view('parent.myStudent' , compact('parent'));
+    }
 
 
 }

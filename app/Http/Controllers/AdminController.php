@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\forgerpasswordmail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -103,6 +104,21 @@ class AdminController extends Controller
         } else {
             return redirect()->back()->with('error', 'Email not found');
         }
+    }
+
+    public function myAccount(){
+        $user = User::find(Auth::user()->id);
+        return view('admin.myaccount' , compact('user'));
+    }
+
+    public function updateAccount(Request $request , $id){
+        $user = User::find($id);
+
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Account Updated Successfully');
     }
 
 }

@@ -48,27 +48,27 @@ class User extends Authenticatable
         ];
     }
 
-    static public function getEmailSingle($email){
-        return User::where('email','=' , $email)->first();
+    public static function getEmailSingle($email) {
+        return self::where('email', '=', $email)->first();
     }
 
-    static public function getSingle($id){
+    public static function getSingle($id) {
         return self::find($id);
     }
 
     public function class(){
-        return $this->hasOne('App\Models\ClassModel','id','class_id');
+        return $this->belongsTo('App\Models\ClassModel', 'class_id');
     }
 
     public function parent()
     {
-        return $this->hasMany(User::class,'id' , 'parent_id');
+        return $this->hasMany(User::class, 'id', 'parent_id');
     }
 
     public function children()
     {
-    return $this->hasMany(User::class, 'parent_id', 'id');
+        return $this->hasMany(User::class, 'parent_id', 'id');
     }
-
-
 }
+
+

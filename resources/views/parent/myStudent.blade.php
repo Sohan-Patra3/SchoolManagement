@@ -7,21 +7,18 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>STUDENT LIST</h1>
-                    </div>
-                    <div class="col-sm-6" style="text-align: right">
-                        <a href="{{ url('admin/student/add') }}" class="btn btn-primary">Add New Student</a>
-                    </div>
-                </div>
-                <form action="{{ url('admin/student/search') }}" method="GET">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="nameInput" placeholder="Search Student name"
-                            name="search">
-                        <input type="submit" value="Search" class="btn btn-primary mt-2">
-                    </div>
-                </form>
 
-                @include('message')
+                        <h1>MY STUDENT LIST</h1>
+                    </div>
+
+                    {{-- <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Simple Tables</li>
+                        </ol>
+                    </div> --}}
+                </div>
+
             </div><!-- /.container-fluid -->
         </section>
 
@@ -29,10 +26,13 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
+
+                    <!-- /.col -->
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h1 class="card-title">Student List</h1>
+                                <h1 class="card-title">My Student List</h1>
+
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body p-0">
@@ -42,7 +42,6 @@
                                             <th>Sl.no</th>
                                             <th>Profile Picture</th>
                                             <th>Name</th>
-                                            <th>Parent Name</th>
                                             <th>Email</th>
                                             <th>Addimission No</th>
                                             <th>Roll No</th>
@@ -56,24 +55,19 @@
                                             <th>Blood Group</th>
                                             <th>Height</th>
                                             <th>Weight</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($data as $student)
+                                        @foreach ($parent->children as $student)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td><img style="border-radius:50%"
-                                                        src="/products/{{ $student->profile_pic }}" alt=""
-                                                        height="50" width="50"></td>
-                                                <td>{{ $student->name }} {{ $student->last_name }}</td>
                                                 <td>
-                                                    @foreach ($student->parent as $child)
-                                                        {{ $child->name }} {{ $child->last_name }}<br>
-                                                    @endforeach
+                                                    <img style="border-radius:50%"
+                                                        src="/products/{{ $student->profile_pic }}" alt=""
+                                                        height="50" width="50">
                                                 </td>
-                                                </td>
+                                                <td>{{ $student->name }}</td>
                                                 <td>{{ $student->email }}</td>
                                                 <td>{{ $student->addmission_number }}</td>
                                                 <td>{{ $student->roll_number }}</td>
@@ -89,35 +83,27 @@
                                                 <td>{{ $student->blood_group }}</td>
                                                 <td>{{ $student->height }}</td>
                                                 <td>{{ $student->weight }}</td>
-                                                <td>
-                                                    @if ($student->status == 0)
-                                                        Active
-                                                    @else
-                                                        Inactive
-                                                    @endif
-                                                </td>
 
-                                                <td><a href="{{ url('admin/student/edit', $student->id) }}"
-                                                        class="btn btn-primary">Edit</a>
-                                                    <a href="{{ url('admin/student/delete', $student->id) }}"
-                                                        class="btn btn-danger mt-1">Delete</a>
-                                                </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer clearfix">
-                                <div class="float-right">
-                                    {{ $data->links() }}
+                                <div class="div_deg" style="float: right">
+                                    {{-- {{ $data->links() }} --}}
                                 </div>
                             </div>
+                            <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
+
+
+                        <!-- /.card -->
                     </div>
+                    <!-- /.col -->
                 </div>
                 <!-- /.row -->
+
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->

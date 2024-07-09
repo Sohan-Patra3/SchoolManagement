@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        @include('message')
+
                         <h1>TEACHER LIST</h1>
                     </div>
                     <div class="col-sm-6" style="text-align: right">
@@ -38,6 +38,7 @@
 
                     <!-- /.col -->
                     <div class="col-md-12">
+                        @include('message')
                         <div class="card">
                             <div class="card-header">
                                 <h1 class="card-title">Teacher List</h1>

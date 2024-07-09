@@ -104,7 +104,7 @@ class TeacherController extends Controller
 
     public function myAccount(){
         $teacher = User::find(Auth::user()->id);
-        return view('admin.teacher.myaccount' , compact('teacher'));
+        return view('teacher.myaccount' , compact('teacher'));
     }
 
     public function updateMyAccount(Request $request , $id){

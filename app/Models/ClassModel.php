@@ -14,4 +14,9 @@ class ClassModel extends Model
     public function user(){
         return $this->hasOne('App\Models\User','id','created_by');
     }
+    public function subjects() {
+        return $this->belongsToMany(Subject::class, 'class_subject', 'class_id', 'subject_id');
+    }
 }
+
+

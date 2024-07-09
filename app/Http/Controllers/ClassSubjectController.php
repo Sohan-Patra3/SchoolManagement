@@ -12,7 +12,6 @@ class ClassSubjectController extends Controller
 {
     public function list(){
         $list = ClassSubjectModel::all();
-
         return view('admin.assing_subject.list' , compact('list'));
     }
 
