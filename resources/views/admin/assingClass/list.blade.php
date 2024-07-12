@@ -8,21 +8,17 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
 
-                        <h1>CLASS LIST</h1>
+                        <h1>ASSING CLASS LIST</h1>
                     </div>
                     <div class="col-sm-6" style="text-align: right">
-                        <a href="{{ url('admin/class/add') }}" class="btn btn-primary">Add New Class</a>
+                        <a href="{{ url('admin/assing_class/add') }}" class="btn btn-primary">New Assing</a>
                     </div>
-                    {{-- <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Simple Tables</li>
-                        </ol>
-                    </div> --}}
+
                 </div>
-                <form action="{{ url('admin/class/search') }}" method="GET">
+
+                <form action="{{ url('admin/assingClass/search') }}" method="GET">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nameInput" placeholder="Search class name"
+                        <input type="text" class="form-control" id="nameInput" placeholder="Search Teacher's name"
                             name="search">
                         <input type="submit" value="search" class="btn btn-primary mt-2">
                     </div>
@@ -41,7 +37,7 @@
                         <div class="card">
                             <div class="card-header">
                                 @include('message')
-                                <h1 class="card-title">Class List</h1>
+                                <h1 class="card-title">Assing Class</h1>
 
                             </div>
                             <!-- /.card-header -->
@@ -50,15 +46,36 @@
                                     <thead>
                                         <tr>
                                             <th>Sl.no</th>
-                                            <th>Name</th>
-                                            <th>Status</th>
+                                            <th>Class Name</th>
+                                            <th>Teacher Name</th>
                                             <th>Created By</th>
+                                            <th>Status</th>
                                             <th>Action</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+                                        @foreach ($list as $data)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $data->class->name }}</td>
+                                                <td>{{ $data->user->name }}</td>
+                                                <td>{{ $data->createdBy->name }}</td>
+                                                <td>
+                                                    @if ($data->status == 0)
+                                                        Active
+                                                    @else
+                                                        Inactive
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <a href="{{ url('admin/assingClass/edit', $data->id) }}"
+                                                        class="btn btn-primary">Edit</a>
+                                                    <a href="{{ url('admin/assingClass/delete', $data->id) }}"
+                                                        class="btn btn-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
 

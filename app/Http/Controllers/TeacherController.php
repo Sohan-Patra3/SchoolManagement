@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssingClassTeacher;
+use App\Models\ClassSubjectModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -135,4 +137,28 @@ class TeacherController extends Controller
 
         return redirect()->back()->with('success' , 'Account Updated Successfully');
     }
+
+    public function classSubject(){
+        $id = Auth::user()->id;
+        $list = AssingClassTeacher::with(['user', 'class'])
+                    ->where('is_delete', '0')
+                    ->where('teacher_id', $id)
+                    ->get();
+        $subject = ClassSubjectModel::with('subject')->get();
+
+        return view('teacher.classSubject', compact('list' , 'subject'));
+    }
+
+    public function myStudent(){
+        $teacher = Auth::user();
+
+        // Get the class IDs assigned to the teacher
+        $classIds = $teacher->assignedClasses()->pluck('class_id');
+
+        // Get the students belonging to the retrieved class IDs
+        $students = User::whereIn('class_id', $classIds)->where('user_type', 'student')->get();
+
+        return view('teacher.myStudent', compact('students'));
+    }
+
 }

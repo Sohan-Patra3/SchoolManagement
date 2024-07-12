@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssingClassTeacherController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ClassSubjectController;
+use App\Http\Controllers\classTimeTableController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
@@ -200,7 +201,9 @@ Route::get('teacher/account' , [TeacherController::class , 'myAccount'])->middle
 
 Route::post('updateMyAccount/{id}' , [TeacherController::class , 'updateMyAccount'])->middleware(['auth' , 'teacher']);
 
+Route::get('teacher/my_class_subject' , [TeacherController::class , 'classSubject'])->middleware(['auth' , 'teacher']);
 
+Route::get('teacher/myStudent' , [TeacherController::class , 'myStudent'])->middleware(['auth' , 'teacher']);
 
 
 
@@ -217,6 +220,32 @@ Route::post('updateMyAccount/{id}' , [TeacherController::class , 'updateMyAccoun
 
 //Assing class
 Route::get('admin/assing_class/list' , [AssingClassTeacherController::class , 'list'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/assing_class/add' , [AssingClassTeacherController::class , 'add'])->middleware(['auth' , 'admin']);
+
+Route::post('assingClass' , [AssingClassTeacherController::class , 'insert'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/assingClass/edit/{id}' , [AssingClassTeacherController::class , 'edit'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/assingClass/delete/{id}' , [AssingClassTeacherController::class , 'delete'])->middleware(['auth' , 'admin']);
+
+Route::post('editAssingClass/{id}' , [AssingClassTeacherController::class , 'update'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/assingClass/search' , [AssingClassTeacherController::class , 'search'])->middleware(['auth' , 'admin']);
+
+//timetable
+
+Route::get('admin/class_timetable/list' , [classTimeTableController::class , 'list'])->middleware(['auth' , 'admin']);
+
+Route::get('admin/class_timetable/add' , [classTimeTableController::class , 'add'])->middleware(['auth' , 'admin']);
+
+
+
+
+
+
+
+
 
 
 
