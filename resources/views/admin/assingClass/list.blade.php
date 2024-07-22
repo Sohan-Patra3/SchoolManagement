@@ -7,22 +7,18 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        @include('message')
-                        <h1>ADMIN LIST</h1>
+
+                        <h1>ASSING CLASS LIST</h1>
                     </div>
                     <div class="col-sm-6" style="text-align: right">
-                        <a href="{{ url('admin/admin/add') }}" class="btn btn-primary">Add New Admin</a>
+                        <a href="{{ url('admin/assing_class/add') }}" class="btn btn-primary">New Assing</a>
                     </div>
-                    {{-- <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Simple Tables</li>
-                        </ol>
-                    </div> --}}
+
                 </div>
-                <form action="{{ url('admin/admin/search') }}" method="GET">
+
+                <form action="{{ url('admin/assingClass/search') }}" method="GET">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nameInput" placeholder="Search Admin name"
+                        <input type="text" class="form-control" id="nameInput" placeholder="Search Teacher's name"
                             name="search">
                         <input type="submit" value="search" class="btn btn-primary mt-2">
                     </div>
@@ -40,7 +36,8 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h1 class="card-title">Admin List</h1>
+                                @include('message')
+                                <h1 class="card-title">Assing Class</h1>
 
                             </div>
                             <!-- /.card-header -->
@@ -49,31 +46,39 @@
                                     <thead>
                                         <tr>
                                             <th>Sl.no</th>
-                                            <th>Admin Name</th>
-                                            <th>Email</th>
-                                            <th>Create Date</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
+                                            <th>Class Name</th>
+                                            <th>Teacher Name</th>
+                                            <th>Created By</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($data as $admin)
+                                        @foreach ($list as $data)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $admin->name }}</td>
-                                                <td>{{ $admin->email }}</td>
-                                                <td>{{ $admin->created_at }}</td>
-                                                <td><a href="{{ url('admin/admin/edit', $admin->id) }}"
-                                                        class="btn btn-primary">Edit</a></td>
-                                                <td><a href="{{ url('admin/admin/delete', $admin->id) }}"
-                                                        class="btn btn-danger">Delete</a></td>
+                                                <td>{{ $data->class->name }}</td>
+                                                <td>{{ $data->user->name }}</td>
+                                                <td>{{ $data->createdBy->name }}</td>
+                                                <td>
+                                                    @if ($data->status == 0)
+                                                        Active
+                                                    @else
+                                                        Inactive
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <a href="{{ url('admin/assingClass/edit', $data->id) }}"
+                                                        class="btn btn-primary">Edit</a>
+                                                    <a href="{{ url('admin/assingClass/delete', $data->id) }}"
+                                                        class="btn btn-danger">Delete</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="div_deg" style="float: right">
-                                    {{ $data->links() }}
-                                </div>
+
                             </div>
                             <!-- /.card-body -->
                         </div>

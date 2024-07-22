@@ -7,11 +7,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        @include('message')
-                        <h1>ADMIN LIST</h1>
+
+                        <h1>CLASS LIST</h1>
                     </div>
                     <div class="col-sm-6" style="text-align: right">
-                        <a href="{{ url('admin/admin/add') }}" class="btn btn-primary">Add New Admin</a>
+                        <a href="{{ url('admin/class/add') }}" class="btn btn-primary">Add New Class</a>
                     </div>
                     {{-- <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -20,9 +20,9 @@
                         </ol>
                     </div> --}}
                 </div>
-                <form action="{{ url('admin/admin/search') }}" method="GET">
+                <form action="{{ url('admin/class/search') }}" method="GET">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nameInput" placeholder="Search Admin name"
+                        <input type="text" class="form-control" id="nameInput" placeholder="Search class name"
                             name="search">
                         <input type="submit" value="search" class="btn btn-primary mt-2">
                     </div>
@@ -40,7 +40,8 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h1 class="card-title">Admin List</h1>
+                                @include('message')
+                                <h1 class="card-title">Class List</h1>
 
                             </div>
                             <!-- /.card-header -->
@@ -49,31 +50,37 @@
                                     <thead>
                                         <tr>
                                             <th>Sl.no</th>
-                                            <th>Admin Name</th>
-                                            <th>Email</th>
-                                            <th>Create Date</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
+                                            <th>Name</th>
+                                            <th>Status</th>
+                                            <th>Created By</th>
+                                            <th>Action</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($data as $admin)
+                                        @foreach ($class as $value)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $admin->name }}</td>
-                                                <td>{{ $admin->email }}</td>
-                                                <td>{{ $admin->created_at }}</td>
-                                                <td><a href="{{ url('admin/admin/edit', $admin->id) }}"
-                                                        class="btn btn-primary">Edit</a></td>
-                                                <td><a href="{{ url('admin/admin/delete', $admin->id) }}"
-                                                        class="btn btn-danger">Delete</a></td>
+                                                <td>{{ $value->name }}</td>
+                                                <td>
+                                                    @if ($value->status == 0)
+                                                        Active
+                                                    @else
+                                                        InActive
+                                                    @endif
+                                                </td>
+                                                <td>{{ $value->user->name }}</td>
+                                                <td>
+                                                    <a href="{{ url('admin/class/edit', $value->id) }}"
+                                                        class="btn btn-primary">Edit</a>
+                                                    <a href="{{ url('admin/class/delete', $value->id) }}"
+                                                        class="btn btn-danger">Delete</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="div_deg" style="float: right">
-                                    {{ $data->links() }}
-                                </div>
+
                             </div>
                             <!-- /.card-body -->
                         </div>
