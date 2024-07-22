@@ -22,27 +22,37 @@ class ClassSubjectController extends Controller
         return view('admin.assing_subject.add', compact(['list' , 'class' ,'subject']));
     }
 
-    public function insert(Request $request){
-    $classId = $request->class_id;
-    $status = $request->status;
-    $createdBy = Auth::user()->id;
+    public function insert(Request $request)
+    {
+        // Validate request data
+        $request->validate([
+            'class_id' => 'required|integer',
+            'subject_ids' => 'required|array',
+            'subject_ids.*' => 'integer',  // Ensure each subject ID is an integer
+            'status' => 'required|integer',
+        ]);
 
-    // Iterate over each selected subject ID and create a new ClassSubjectModel entry
-    foreach ($request->subject_ids as $subjectId) {
 
 
-        $classSubject = new ClassSubjectModel;
+        $classId = $request->class_id;
+        $status = $request->status;
+        $createdBy = Auth::user()->id;
 
-        $classSubject->class_id = $classId;
-        $classSubject->subject_id = $subjectId;
-        $classSubject->status = $status;
-        $classSubject->created_by = $createdBy;
 
-        $classSubject->save();
+        foreach ($request->subject_ids as $subjectId) {
+            $classSubject = new ClassSubjectModel;
+
+            $classSubject->class_id = $classId;
+            $classSubject->subject_id = $subjectId;
+            $classSubject->status = $status;
+            $classSubject->created_by = $createdBy;
+
+            $classSubject->save();
+        }
+
+        return redirect('admin/assing_subject/list')->with('success', 'Subjects assigned successfully.');
     }
 
-    return redirect('admin/assing_subject/list')->with('success', 'Subjects assigned successfully.');
-    }
 
     public function editInsert($id){
         $classSubject = ClassSubjectModel::find($id);

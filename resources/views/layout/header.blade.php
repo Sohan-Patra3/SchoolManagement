@@ -225,7 +225,24 @@
                         </ul>
                     </li>
 
-
+                    <li class="nav-item @if (in_array(Request::segment(2), ['examinations'])) menu-is-opening menu-open @endif">
+                        <a href="#" class="nav-link @if (in_array(Request::segment(2), ['examinations'])) active @endif">
+                            <i class="nav-icon fas fa-table"></i>
+                            <p>
+                                Examination
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+                            <li class="nav-item">
+                                <a href="{{ url('admin/examinations/exam/list') }}"
+                                    class="nav-link @if (Request::segment(3) == 'exam') active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Exam List</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
                     <li class="nav-item">
                         <a href="{{ url('admin/account') }}"

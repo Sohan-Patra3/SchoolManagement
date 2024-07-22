@@ -76,14 +76,6 @@ class AdminController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
     public function forget_password(){
         $data['header_title']='Admin List';
         return view('auth.forget_password',$data);

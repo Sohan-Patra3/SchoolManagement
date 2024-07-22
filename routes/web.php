@@ -5,6 +5,7 @@ use App\Http\Controllers\AssingClassTeacherController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ClassSubjectController;
 use App\Http\Controllers\classTimeTableController;
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
@@ -135,7 +136,9 @@ Route::post('updateMyAccountedit/{id}', [StudentController::class, 'updateMyAcco
 Route::get('student/subject', [SubjectController::class, 'mySubject'])->middleware(['auth', 'student']);
 
 
+//exam
 
+Route::get('admin/examinations/exam/list' , [ExamController::class , 'exam_list'])->middleware(['auth' , 'admin']);
 
 
 
