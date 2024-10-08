@@ -5,8 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | Dashboard</title>
-
-    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -27,6 +25,7 @@
     <link rel="stylesheet" href="{{ url('plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rlel="stylesheet" href="{{ url('plugins/summernote/summernote-bs4.min.css') }}">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -42,7 +41,7 @@
 
 
         @yield('content')
-       
+
 
 
         @include('layout.footer')
@@ -85,6 +84,7 @@
     <script src="{{ url('dist/js/demo.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ url('dist/js/pages/dashboard.js') }}"></script>
+
 </body>
 
 </html>

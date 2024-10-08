@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use GuzzleHttp\Psr7\Request;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -45,7 +48,38 @@ class User extends Authenticatable
         ];
     }
 
-    static public function getEmailSingle($email){
-        return User::where('email','=' , $email)->first();
+    public static function getEmailSingle($email) {
+        return self::where('email', '=', $email)->first();
+    }
+
+    public static function getSingle($id) {
+        return self::find($id);
+    }
+
+    public function class(){
+        return $this->belongsTo('App\Models\ClassModel', 'class_id');
+    }
+
+    public function parent()
+    {
+        return $this->hasMany(User::class, 'id', 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(User::class, 'parent_id', 'id');
+    }
+
+    public function assignedClasses()
+    {
+        return $this->hasMany(AssingClassTeacher::class, 'teacher_id');
+    }
+
+
+    public function students()
+    {
+        return $this->hasMany(User::class, 'class_id', 'class_id');
     }
 }
+
+
